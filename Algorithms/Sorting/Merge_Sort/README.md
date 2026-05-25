@@ -6,5 +6,6 @@
 
 **A Velocidade (Prática vs Matemática):** Tem um limite matemático rigoroso e blindado de **O(N log N)** no melhor, médio e pior caso. O algoritmo nunca entra em colapso. Contudo, na execução real no *hardware*, costuma ser ligeiramente mais lento do que o Quick Sort. Isto ocorre porque o ato de pedir blocos de memória ao sistema operativo (`malloc`) e ler dados de áreas muito separadas da RAM gera atrasos físicos (os chamados *Cache Misses* no processador).
 
-**Como acionar (A interface):** ```c
+**Como acionar (A interface):** 
+```c
 mergeSort(meu_array, 0, tamanho_do_array - 1);
