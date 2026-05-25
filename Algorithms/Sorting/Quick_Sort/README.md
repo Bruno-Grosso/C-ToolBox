@@ -6,6 +6,7 @@
 
 **A Velocidade (Prática vs Matemática):** Excecionalmente rápido no cronómetro. Embora teoricamente partilhe o tempo médio de **O(N log N)** com o Merge Sort, o Quick Sort domina na prática. Como os seus ponteiros caminham linearmente pela memória, o processador consegue prever os movimentos e carregar os dados para a memória ultrarrápida (**Cache L1**). Tem um processamento contínuo sem perdas de tempo com alocações dinâmicas.
 
-**Como acionar (A interface):** ```c
+**Como acionar (A interface):** 
+```c
 quickSort(meu_array, 0, tamanho_do_array - 1);
 
