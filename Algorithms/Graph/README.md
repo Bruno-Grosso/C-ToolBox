@@ -46,3 +46,17 @@ dfs(my_map, 0, num_vertex);
 kosaraju(my_map, num_vertex);
 ```
 --------------------------------------------
+## Algoritmo de Dijkstra (Caminho Mais Curto)
+
+**Quando usar:** A ferramenta definitiva para logística, rotas de GPS, roteamento de pacotes em redes de servidores e inteligência artificial para movimentação em mapas. Sempre que as arestas do seu grafo tiverem "pesos" ou "custos" (tempo, pedágio, distância, latência) e você precisar descobrir matematicamente a rota global mais barata da origem ao destino. **Atenção:** Só funciona se não houver custos negativos no mapa.
+
+**O que faz:** Opera como um "radar guloso". Partindo da origem, ele avalia constantemente todas as cidades conhecidas e salta para a mais barata. A partir dela, ele atualiza as rotas para os vizinhos imediatos (um processo chamado de *Relaxamento*). O algoritmo nunca "pula de galho em galho" às cegas; ele varre o mapa com visão global, garantindo que não caia em armadilhas locais (becos sem saída ou rotas que começam baratas mas terminam caras).
+
+**A Velocidade (Prática vs Matemática):** Na nossa implementação base utilizando arrays estáticos para buscar o menor valor, a complexidade é **O(V²)**, o que é excelente para grafos densos e mapas de pequeno a médio porte. (Para roteamento em escala global, a indústria substitui o array de busca por uma *Min-Heap / Fila de Prioridade*, derrubando o custo para **O((V + E) log V)**).
+
+**Como acionar (A interface):**
+
+```c
+// Calcula e imprime a rota mais barata e a distância final do vértice 0 ao 4
+dijkstra(my_map, 0, 4);
+```
