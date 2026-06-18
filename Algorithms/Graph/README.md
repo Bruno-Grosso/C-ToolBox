@@ -28,3 +28,21 @@ bfs(my_map, 0); // Executa a varredura em onda a partir do vértice 0
 dfs(my_map, 0, num_vertex);
 ```
 ---------------------------------------------
+## Algoritmo de Kosaraju (Componentes Fortemente Conexos)
+
+**Quando usar:** Quando precisar auditar a integridade de um sistema direcional. É a ferramenta definitiva para identificar "bolhas" (grupos de nós onde qualquer um consegue alcançar qualquer outro) e para validar se um fluxo de dependências (como um *pipeline* de dados) possui ciclos circulares fatais. 
+
+**O que faz:** O algoritmo é uma obra-prima de reaproveitamento. Ele executa três passos precisos usando as ferramentas que você já tem:
+1. Roda uma DFS no grafo original, empurrando cada vértice para uma Pilha apenas quando ele termina *totalmente* de ser explorado (ordem de finalização).
+2. Transpõe o grafo (inverte a direção de absolutamente todas as arestas de "mão única").
+3. Roda uma nova DFS no grafo invertido, mas desta vez, a ordem de ignição é ditada pelo topo da Pilha do passo 1. Cada mergulho bem-sucedido dessa nova DFS revela um Componente Fortemente Conexo isolado.
+
+**A Velocidade (Prática vs Matemática):** Custa o equivalente a duas rodadas de DFS, o que matematicamente continua sendo cravado em **O(V + E)**. O gasto de hardware extra vem puramente da necessidade de alocar memória para criar o "Grafo Invertido" temporário, uma troca justa pela garantia estrutural que ele entrega.
+
+**Como acionar (A interface):**
+
+```c
+// Analisa o mapa, inverte os vetores e imprime as bolhas de conectividade
+kosaraju(my_map, num_vertex);
+```
+--------------------------------------------
