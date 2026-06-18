@@ -13,3 +13,18 @@ bfs(my_map, 0); // Executa a varredura em onda a partir do vértice 0
 
 ```
 -----------------------------------------------
+## Busca em Profundidade (DFS - Depth-First Search)
+
+**Quando usar:** Ideal para explorar labirintos, detectar ciclos (dependências circulares), realizar ordenação topológica e como motor base para algoritmos avançados (como a descoberta de Componentes Fortemente Conexos no algoritmo de Kosaraju). Se o objetivo é varrer todas as possibilidades até o fim de um caminho antes de tentar uma alternativa, a DFS é a ferramenta correta.
+
+**O que faz:** O algoritmo escolhe um caminho e mergulha agressivamente o mais fundo possível no grafo. Quando atinge um beco sem saída, ele executa o *backtracking* (retrocesso), voltando pelo próprio rastro até encontrar uma encruzilhada com caminhos inexplorados. Diferente da BFS que usa uma Fila (FIFO), a DFS exige uma **Pilha (LIFO - Last In, First Out)**. 
+
+**A Velocidade (Prática vs Matemática):** Mantém a eficiência máxima de **O(V + E)** em Listas de Adjacência. A implementação recursiva é extremamente enxuta, pois delega o controle da Pilha diretamente para a *Call Stack* (Pilha de Chamadas) do processador. O único cuidado de hardware é em grafos colossalmente profundos, onde o excesso de chamadas recursivas poderia causar um *Stack Overflow*.
+
+**Como acionar (A interface):**
+
+```c
+// Inicializa o array de visitados e dispara a recursão a partir do vértice 0
+dfs(my_map, 0, num_vertex);
+```
+---------------------------------------------
