@@ -11,23 +11,29 @@ Recebe um bloco de memória (um array, uma string ou uma struct) e tritura os bi
 
 ---
 
-# Tabela Hash: Hashing Universal com Encadeamento (*Chaining*)
+# Tabela Hash: Hashing Universal + Encadeamento
 
-**Quando usar:** Quando você precisa de um dicionário de dados ou sistema de cache extremamente rápido e seguro, e não quer se preocupar com a tabela travando caso fique muito cheia. É a estrutura ideal para indexar IDs de usuários, rotas de rede ou tabelas de símbolos em compiladores.
+**Quando usar:** Em dicionários de dados e sistemas de cache de altíssima velocidade onde a tabela pode sofrer picos de sobrecarga sem o risco de travar o sistema.
 
-**O que faz:** Cria um array principal na memória onde cada posição (gaveta) guarda um ponteiro para uma Lista Encadeada. O sistema utiliza a arquitetura de **Hashing Universal**, que sorteia parâmetros matemáticos randômicos ($a$ e $b$) e utiliza a aritmética de números primos ($p$) para embaralhar as chaves inseridas. Isso blinda o sistema contra ataques de negação de serviço (HashDoS) e garante que os dados se espalhem perfeitamente. Em caso de colisão (duas chaves caindo na mesma gaveta), elas são simplesmente empilhadas em uma lista ligada.
+**O que faz:** * **Estrutura Física:** Cria um array principal onde cada gaveta guarda um ponteiro para uma Lista Encadeada.
+* **Segurança Matemática:** Usa o **Hashing Universal** (sorteando variáveis $a$ e $b$, e usando um número primo $p$) para blindar o sistema contra ataques de colisões propositais (HashDoS).
+* **Resolução de Colisões:** Se duas chaves caem na mesma gaveta, elas são conectadas por ponteiros (Encadeamento).
 
-**A Velocidade (Prática vs Matemática):** Graças ao Hashing Universal, a probabilidade de colisão é minimizada, garantindo um tempo de inserção e busca esperado rigoroso de **$\mathcal{O}(1)$**. A estabilidade dessa performance depende do *Fator de Carga* ($\alpha = \frac{N}{M}$). Contanto que $\alpha$ seja mantido baixo (usando redimensionamento dinâmico), a busca na lista encadeada é instantânea.
+**A Velocidade:**
+* **Tempo de Execução:** $\mathcal{O}(1)$ para inserção e busca.
+* **Gargalo:** A performance depende de manter o Fator de Carga ($\alpha$) baixo, evitando que as listas encadeadas fiquem longas demais.
 
-**Encadeamento vs. Endereçamento Livre (*Open Addressing*):** Nesta implementação, optou-se pelo Tratamento de Colisão por Encadeamento (usando `structs` e ponteiros). Uma alternativa de design seria o **Endereçamento Livre** (ex: *Sondagem Dupla* ou *Linear*), que armazena os dados diretamente no array principal, eliminando os ponteiros para economizar memória RAM e maximizar o cache do processador. O custo do Endereçamento Livre é uma intolerância muito maior a fatores de carga altos, travando o sistema se a memória lotar, enquanto o Encadeamento desta implementação suporta sobrecargas graciosamente.
+**Encadeamento vs Endereçamento Livre:**
+* **Encadeamento (Este código):** Usa `structs` e ponteiros. Gasta mais memória RAM com chamadas de `malloc`, mas é super resiliente se a tabela encher.
+* **Endereçamento Livre:** Usa apenas um array contíguo. Maximiza o cache L1/L2 do processador, mas trava em loop infinito se atingir 100% de ocupação sem um redimensionamento prévio.
 
 **Como acionar (A interface):**
 
 ```c
-// Inicializa uma tabela com 11 gavetas e um primo maior que as chaves esperadas
+// Inicializa tabela com 11 gavetas e um primo gigante (104729)
 TabelaHash* dicionario = inicializar_tabela(11, 104729);
 
 inserir(dicionario, 402);
 inserir(dicionario, 951);
 
-Node* resultado = buscar(dicionario, 402); // Retorna instantaneamente o ponteiro do nó
+Node* resultado = buscar(dicionario, 402); // Retorna o ponteiro O(1)
