@@ -11,29 +11,18 @@ Recebe um bloco de memória (um array, uma string ou uma struct) e tritura os bi
 
 ---
 
-# Tabela Hash: Hashing Universal + Encadeamento
+## Encadeamento (*Chaining*)
+**Arquivo:** `hash_chaining.c`
 
-**Quando usar:** Em dicionários de dados e sistemas de cache de altíssima velocidade onde a tabela pode sofrer picos de sobrecarga sem o risco de travar o sistema.
+* **Como funciona:** Cada gaveta do array principal guarda um ponteiro para uma Lista Encadeada. Se houver colisão, os novos elementos são pendurados nessa lista.
+* **Vantagem:** É uma estrutura elástica e resiliente. Sobrevive a picos de tráfego e não trava o sistema mesmo se a tabela ficar sobrecarregada (Fator de Carga alto).
+* **Desvantagem:** O uso de `structs` e chamadas constantes de `malloc` para criar os nós fragmenta a memória RAM, reduzindo a eficiência do cache do processador.
 
-**O que faz:** * **Estrutura Física:** Cria um array principal onde cada gaveta guarda um ponteiro para uma Lista Encadeada.
-* **Segurança Matemática:** Usa o **Hashing Universal** (sorteando variáveis $a$ e $b$, e usando um número primo $p$) para blindar o sistema contra ataques de colisões propositais (HashDoS).
-* **Resolução de Colisões:** Se duas chaves caem na mesma gaveta, elas são conectadas por ponteiros (Encadeamento).
+---
 
-**A Velocidade:**
-* **Tempo de Execução:** $\mathcal{O}(1)$ para inserção e busca.
-* **Gargalo:** A performance depende de manter o Fator de Carga ($\alpha$) baixo, evitando que as listas encadeadas fiquem longas demais.
+## Endereçamento Aberto (*Open Addressing*)
+**Arquivo:** `hash_open_addressing.c`
 
-**Encadeamento vs Endereçamento Livre:**
-* **Encadeamento (Este código):** Usa `structs` e ponteiros. Gasta mais memória RAM com chamadas de `malloc`, mas é super resiliente se a tabela encher.
-* **Endereçamento Livre:** Usa apenas um array contíguo. Maximiza o cache L1/L2 do processador, mas trava em loop infinito se atingir 100% de ocupação sem um redimensionamento prévio.
-
-**Como acionar (A interface):**
-
-```c
-// Inicializa tabela com 11 gavetas e um primo gigante (104729)
-TabelaHash* dicionario = inicializar_tabela(11, 104729);
-
-inserir(dicionario, 402);
-inserir(dicionario, 951);
-
-Node* resultado = buscar(dicionario, 402); // Retorna o ponteiro O(1)
+* **Como funciona:** Elimina totalmente as Listas Encadeadas e ponteiros. Os dados são salvos diretamente nas gavetas do array principal. Em caso de colisão, o algoritmo usa matemática (*Sondagem Dupla*) para calcular um pulo fixo e procurar a próxima gaveta vazia.
+* **Vantagem:** Máxima velocidade bruta em hardware (*Cache-friendly*), pois o processador varre um bloco maciço e contíguo de memória RAM sem precisar caçar ponteiros soltos.
+* **Desvantagem:** Exige controle rigoroso da lotação. Se a tabela atingir capacidade máxima, o sistema entra em loop infinito e trava, exigindo a implementação paralela de uma função de *Redimensionamento Dinâmico* (Re-hashing).
