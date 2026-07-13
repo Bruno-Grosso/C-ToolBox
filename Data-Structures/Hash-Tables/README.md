@@ -26,3 +26,13 @@ Recebe um bloco de memória (um array, uma string ou uma struct) e tritura os bi
 * **Como funciona:** Elimina totalmente as Listas Encadeadas e ponteiros. Os dados são salvos diretamente nas gavetas do array principal. Em caso de colisão, o algoritmo usa matemática (*Sondagem Dupla*) para calcular um pulo fixo e procurar a próxima gaveta vazia.
 * **Vantagem:** Máxima velocidade bruta em hardware (*Cache-friendly*), pois o processador varre um bloco maciço e contíguo de memória RAM sem precisar caçar ponteiros soltos.
 * **Desvantagem:** Exige controle rigoroso da lotação. Se a tabela atingir capacidade máxima, o sistema entra em loop infinito e trava, exigindo a implementação paralela de uma função de *Redimensionamento Dinâmico* (Re-hashing).
+
+---
+
+## Filtro de Bloom (Bloom Filter)
+
+**Arquivo:** `bloom_filter.c`
+
+* **Como funciona:** É estruturado como um array estático de bits. Quando você insere uma chave, ela é processada por múltiplas funções de *hash* diferentes. Cada função devolve um índice numérico, e os bits nessas posições exatas do array são "acesos" (alterados de `0` para `1`). Para checar se a chave existe, basta verificar se todos os bits gerados pelos *hashes* estão em `1`.
+* **Vantagem:** Economia extrema de espaço e velocidade. Diferente do encadeamento, você não cria novas `structs` com `malloc` para pendurar novos elementos. A RAM não é fragmentada, e a resposta sobre a existência do dado é devolvida em tempo constante real.
+* **Desvantagem:** A estrutura sofre com falsos positivos (pode afirmar que um dado existe simplesmente porque os seus bits já haviam sido acesos por outras chaves inseridas antes). Além disso, não é possível remover um elemento da tabela de forma simples, pois desligar um bit corromperia a assinatura de outros dados cruzados.
