@@ -60,3 +60,19 @@ kosaraju(my_map, num_vertex);
 // Calcula e imprime a rota mais barata e a distância final do vértice 0 ao 4
 dijkstra(my_map, 0, 4);
 ```
+---
+## Algoritmo de Prim (Árvore Geradora Mínima - MST)
+
+**Quando usar:** A ferramenta definitiva para redes de infraestrutura, cabeamento de fibra ótica, malhas logísticas e design de circuitos integrados. Sempre que você tiver um grafo não-direcionado com arestas ponderadas (custos, distâncias ou preços) e precisar descobrir o conjunto exato de conexões capaz de **interligar todos os vértices do mapa gastando o mínimo absoluto de recursos**, sem criar ciclos fechados.
+
+**O que faz:** O algoritmo parte de um vértice inicial e vai "conquistando" o grafo de forma gulosa. A cada passo, ele analisa todas as pontes (arestas) que ligam o território já dominado aos vértices vizinhos ainda não visitados e seleciona a estritamente mais barata (uma aplicação direta da *Propriedade do Corte*). Para manter essa escolha eficiente, ele utiliza um motor de Fila de Prioridade (**Min-Heap**) aliado a um array de rastreamento de índices (um "GPS" interno), garantindo que os nós sejam atualizados instantaneamente.
+
+**A Velocidade (Prática vs Matemática):** Graças à nossa implementação avançada com Min-Heap e indexação direta, o algoritmo atinge uma complexidade ótima de **$O(m \log n)$** (onde $m$ é o número de arestas e $n$ é o número de vértices), eliminando os gargalos de busca linear $O(V^2)$ e permitindo processar redes massivas em milissegundos, mesmo lidando com pesos negativos no mapa.
+
+**Como acionar (A interface):**
+
+```c
+// Carrega o arquivo do grafo e calcula a Árvore Geradora Mínima a partir do vértice 0
+prim_mst(graph, 0);
+```
+
