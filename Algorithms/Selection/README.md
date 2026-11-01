@@ -1,6 +1,6 @@
 
 
-## RSelect (Randomized Selection)
+## [RSelect (Randomized Selection)](rselect.c)
 
 **Quando usar:** Sempre que precisar de encontrar o $i$-ésimo menor elemento (estatística de ordem) num array não ordenado — como, por exemplo, encontrar a mediana exata de uma lista de atributos de jogadores — de forma extremamente rápida e sem o custo computacional de ordenar o array inteiro primeiro.
 
