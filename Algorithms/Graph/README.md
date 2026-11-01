@@ -1,4 +1,4 @@
-## Busca em Largura (BFS - Breadth-First Search)
+## [Busca em Largura (BFS - Breadth-First Search)](bfs_search.c)
 
 **Quando usar:** Sempre que precisar explorar um mapa expandindo a busca em formato de "ondas" concêntricas ou "camadas". É a escolha absoluta e matematicamente garantida para encontrar o **caminho mais curto em grafos não ponderados** (onde não há peso nas arestas, apenas conexões). Excelente para sistemas de recomendação ("amigos em comum") e varreduras de redes de roteadores.
 
@@ -13,7 +13,7 @@ bfs(my_map, 0); // Executa a varredura em onda a partir do vértice 0
 
 ```
 -----------------------------------------------
-## Busca em Profundidade (DFS - Depth-First Search)
+## [Busca em Profundidade (DFS - Depth-First Search)](dfs_search.c)
 
 **Quando usar:** Ideal para explorar labirintos, detectar ciclos (dependências circulares), realizar ordenação topológica e como motor base para algoritmos avançados (como a descoberta de Componentes Fortemente Conexos no algoritmo de Kosaraju). Se o objetivo é varrer todas as possibilidades até o fim de um caminho antes de tentar uma alternativa, a DFS é a ferramenta correta.
 
@@ -28,7 +28,7 @@ bfs(my_map, 0); // Executa a varredura em onda a partir do vértice 0
 dfs(my_map, 0, num_vertex);
 ```
 ---------------------------------------------
-## Algoritmo de Kosaraju (Componentes Fortemente Conexos)
+## [Algoritmo de Kosaraju (Componentes Fortemente Conexos)](kosaraju.c)
 
 **Quando usar:** Quando precisar auditar a integridade de um sistema direcional. É a ferramenta definitiva para identificar "bolhas" (grupos de nós onde qualquer um consegue alcançar qualquer outro) e para validar se um fluxo de dependências (como um *pipeline* de dados) possui ciclos circulares fatais. 
 
@@ -46,7 +46,7 @@ dfs(my_map, 0, num_vertex);
 kosaraju(my_map, num_vertex);
 ```
 --------------------------------------------
-## Algoritmo de Dijkstra (Caminho Mais Curto)
+## [Algoritmo de Dijkstra (Caminho Mais Curto)](dijkstra.c)
 
 **Quando usar:** A ferramenta definitiva para logística, rotas de GPS, roteamento de pacotes em redes de servidores e inteligência artificial para movimentação em mapas. Sempre que as arestas do seu grafo tiverem "pesos" ou "custos" (tempo, pedágio, distância, latência) e você precisar descobrir matematicamente a rota global mais barata da origem ao destino. **Atenção:** Só funciona se não houver custos negativos no mapa.
 
@@ -61,7 +61,7 @@ kosaraju(my_map, num_vertex);
 dijkstra(my_map, 0, 4);
 ```
 ---
-## Algoritmo de Prim (Árvore Geradora Mínima - MST)
+## [Algoritmo de Prim (Árvore Geradora Mínima - MST)](prim_mst.c)
 
 **Quando usar:** A ferramenta definitiva para redes de infraestrutura, cabeamento de fibra ótica, malhas logísticas e design de circuitos integrados. Sempre que você tiver um grafo não-direcionado com arestas ponderadas (custos, distâncias ou preços) e precisar descobrir o conjunto exato de conexões capaz de **interligar todos os vértices do mapa gastando o mínimo absoluto de recursos**, sem criar ciclos fechados.
 
