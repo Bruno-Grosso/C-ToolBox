@@ -1,4 +1,4 @@
-## Algoritmo de Huffman (Compressão de Dados Sem Perdas)
+## Algoritmo de Huffman (Compressão de Dados Sem Perdas)[/huffman_code.c]
 
 **Quando usar:** A ferramenta definitiva para compactação de arquivos, streaming de mídia, protocolos de rede de alta performance e algoritmos de arquivamento (como ZIP e GZIP). Sempre que você precisar comprimir uma sequência de dados reduzindo o número total de bits sem perder absolutamente nenhuma informação. É a base matemática para qualquer sistema moderno de transferência eficiente de arquivos.
 
