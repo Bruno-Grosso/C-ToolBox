@@ -1,4 +1,4 @@
-## Grafos: Lista de Adjacências
+## [Grafos: Lista de Adjacências](adjacency_list.c)
 
 **Quando usar:** Sempre que precisar modelar redes (rotas viárias, conexões de computadores, dependências lógicas) onde o número de conexões reais é muito menor que o limite máximo possível (os chamados *grafos esparsos*). É a escolha definitiva para manter a eficiência e não estourar a memória RAM.
 
