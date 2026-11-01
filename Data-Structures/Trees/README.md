@@ -1,4 +1,4 @@
-# BST: Árvore Binária de Busca (*Binary Search Tree*)
+# [BST: Árvore Binária de Busca (*Binary Search Tree*)](bst.c)
 
 **Quando usar:** Sempre que precisar de um sistema altamente dinâmico onde os dados precisam ser frequentemente inseridos, removidos, mas ainda assim mantidos perfeitamente ordenados. É a estrutura ideal para buscas em bancos de dados relacionais leves ou para resolver consultas de intervalos (ex: "me dê todos os clientes com idade entre 20 e 30 anos").
 
@@ -22,7 +22,7 @@ raiz = remover(raiz, 50); // Apaga a raiz e reestrutura os ponteiros sem quebrar
 ```
 ----
 
-# RBT: Árvore Rubro-Negra (*Red-Black Tree*)
+# [RBT: Árvore Rubro-Negra (*Red-Black Tree*)](rbt.c)
 
 **Quando usar:** É o padrão ouro absoluto da engenharia de software quando você precisa de uma Árvore de Busca que sofrerá um fluxo constante, agressivo e imprevisível de inserções e remoções. É a estrutura exata usada por baixo dos panos pelo escalonador de processos do Kernel do Linux (*Completely Fair Scheduler*) e na biblioteca padrão do C++ (`std::map`). 
 
