@@ -1,4 +1,4 @@
-# Jenkins One-At-A-Time Hash
+# [Jenkins One-At-A-Time Hash](jenkins_hash.c)
 
 **Quando usar:** Sempre que precisar criar uma Tabela Hash em C para evitar a lentidão $O(N^2)$ em problemas de busca e contagem.
 
@@ -11,7 +11,7 @@ Recebe um bloco de memória (um array, uma string ou uma struct) e tritura os bi
 
 ---
 
-## Encadeamento (*Chaining*)
+## [Encadeamento (*Chaining*)](hash_chaining.c)
 **Arquivo:** `hash_chaining.c`
 
 * **Como funciona:** Cada gaveta do array principal guarda um ponteiro para uma Lista Encadeada. Se houver colisão, os novos elementos são pendurados nessa lista.
@@ -20,7 +20,7 @@ Recebe um bloco de memória (um array, uma string ou uma struct) e tritura os bi
 
 ---
 
-## Endereçamento Aberto (*Open Addressing*)
+## [Endereçamento Aberto (*Open Addressing*)](hash_open_addressing.c)
 **Arquivo:** `hash_open_addressing.c`
 
 * **Como funciona:** Elimina totalmente as Listas Encadeadas e ponteiros. Os dados são salvos diretamente nas gavetas do array principal. Em caso de colisão, o algoritmo usa matemática (*Sondagem Dupla*) para calcular um pulo fixo e procurar a próxima gaveta vazia.
@@ -29,7 +29,7 @@ Recebe um bloco de memória (um array, uma string ou uma struct) e tritura os bi
 
 ---
 
-## Filtro de Bloom (Bloom Filter)
+## [Filtro de Bloom (Bloom Filter)](bloom_filter.c)
 
 **Arquivo:** `bloom_filter.c`
 
