@@ -1,4 +1,4 @@
-# Heaps: Fila de Prioridade (Max/Min)
+# [Heaps: Fila de Prioridade (Max/Min)](max_heap.c)
 
 **Quando usar:** Sempre que precisar processar itens com base em sua importância ou urgência, e não na ordem de chegada (como em algoritmos de roteamento de rede, caminho mínimo de Dijkstra, ou agendamento de processos no sistema operacional). É a escolha definitiva para manter acesso imediato ao elemento mais prioritário do sistema sem precisar ordenar toda a base de dados.
 
