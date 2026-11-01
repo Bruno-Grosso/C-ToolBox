@@ -1,4 +1,4 @@
-# Merge Sort
+# [Merge Sort](merge_sort.c)
 
 **Quando usar:** Sempre que precisar de uma ordenação com velocidade **100% garantida** em O(N log N) em qualquer cenário e precisar de **Estabilidade** (manter a ordem original de elementos repetidos com a mesma chave), desde que tenha memória RAM abundante.
 
@@ -11,7 +11,7 @@
 mergeSort(meu_array, 0, tamanho_do_array - 1);
 ```
 -----------------------------------------
-# Quick Sort (In-Place com Mediana de Três)
+# [Quick Sort (In-Place com Mediana de Três)](quick_sort.c)
 
 **Quando usar:** Sempre que precisar da ordenação mais rápida possível diretamente no processador para arrays gigantes e **não tiver memória extra** disponível (sistemas com pouca RAM).
 
