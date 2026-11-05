@@ -1,16 +1,13 @@
-## [Problema da Mochila 0/1 com Rolling Arrays (Otimização de Espaço)](knapsack_backpack.c)
+## [Problema da Mochila 0/1 com Matriz Completa (Abordagem Tabular)](knapsack_backpack.c)
 
-**Quando usar:** A ferramenta definitiva para problemas de alocação de recursos, gerenciamento de portfólio de investimentos, corte de material industrial, criptografia e sistemas de corte de estoque. Sempre que você precisa selecionar o subconjunto ideal de itens que maximiza o lucro total sem estourar uma capacidade ou limite estrito de peso. É o núcleo clássico de otimização combinatória em engenharia.
+**Quando usar:** A ferramenta fundamental de aprendizado e referência para programação dinâmica, ideal para fins didáticos, auditoria de caminhos e problemas de tamanho moderado onde é necessário rastrear e reconstruir quais itens exatos foram escolhidos para compor a solução ótima.
 
-**O que faz:** O algoritmo opera sob o paradigma de **Programação Dinâmica**. Ele avalia incrementalmente cada item disponível, decidindo matematicamente entre incluí-lo ou ignorá-lo para cada subcapacidade possível da mochila. Para resolver o problema em larga escala sem esmagar os limites de memória física (evitando a barreira de gigabytes exigida por uma matriz bidimensional completa), a arquitetura implementa uma técnica de **Rolling Arrays** com indexação por paridade (`current_item % 2`) ou uma varredura iterativa em **marcha à ré** (`w >= current_weight`) usando um único array. Isso comprime drasticamente a complexidade espacial de $O(N \times W)$ para $O(W)$, garantindo que o processamento caiba confortavelmente na memória RAM.
+**O que faz:** O algoritmo opera sob o paradigma de **Programação Dinâmica**, construindo explicitamente uma matriz bidimensional de estados de tamanho $(N + 1) \times (W + 1)$. Para cada item disponível e para cada subcapacidade possível da mochila, a arquitetura avalia matricialmente a decisão de transição: ou se preserva o valor anterior (excluindo o item) ou se soma o valor do item atual ao lucro ótimo da capacidade remanescente. O rastreamento completo em tabela permite não apenas obter o valor máximo, mas também realizar o *backtracking* para listar exatamente quais itens entraram na mochila.
 
-**A Velocidade (Prática vs Matemática):** Na sua execução otimizada com alocação em Heap e manipulação direta de ponteiros, a complexidade temporal atinge **O(N \times W)**, onde N é o número total de itens e W é a capacidade máxima da mochila. O uso de tipos de dados de 64 bits (`long long`) protege o sistema contra estouramento de inteiros (*overflow*) ao acumular lucros massivos, enquanto o redirecionamento de fluxo (*freopen*) assegura uma ingestão de dados limpa e sem *overhead* de E/S.
+**A Velocidade (Prática vs Matemática):** Na sua execução padrão utilizando alocação dinâmica em Heap, a complexidade temporal se mantém em **O(N \times W)**, onde N é o número de itens e W é a capacidade máxima. A complexidade espacial assume a forma completa **O(N \times W)**, exigindo uma alocação de memória proporcional à tabela bidimensional, o que oferece clareza absoluta de estado em troca de maior consumo de RAM comparado às versões de array único ou rolling arrays.
 
 **Como acionar (A interface):**
 
 ```c
-// Inicializa a estrutura e aloca os vetores de otimização de espaço na Heap
-Datas* datas = create_datas();
-
-// Executa o núcleo de programação dinâmica por rolling arrays e retorna o lucro ótimo
-long long value_final = DP_core(datas, 1);
+// Inicializa a matriz de estados e executa o núcleo tabular da mochila 0/1
+int max_value = knapsack_matrix_core(knap, values, weights);
